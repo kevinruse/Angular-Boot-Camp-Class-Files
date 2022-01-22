@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Dataset API getdata - finished</title>
+	<link rel="icon" type="image/png" href="../images/favicon.ico" />
+	<link rel="stylesheet" href="dataset.css"/>
+</head>
+<body>
+<h2>Grains</h2>
+<ul>
+		<li data-grain="whole grain">Amaranth</li>
+		<li data-grain="refined grain">Cornbread</li>
+		<li data-grain="whole grain">Millet</li>
+		<li data-grain="refined grain">Noodles</li>
+		<li data-grain="refined grain">Pasta</li>
+		<li data-grain="whole grain">Popcorn</li>
+</ul>
+<button id="wholeGrains" class="fpButton">Whole Grains</button>
+<button id="refinedGrains" class="fpButton">Refined Grains</button>
+<script>
+	var liElems = document.querySelectorAll('li');
+	document.getElementById('wholeGrains').addEventListener('click', function() {
+		for (var i = 0; i < liElems.length; i++) {
+			if (liElems[i].dataset.grain === "whole grain") {
+				//console.log(liElems[i] + " is a whole grain.");
+				liElems[i].style.backgroundColor = '#00ff00';
+			}
+		}
+	});
+	document.getElementById('refinedGrains').addEventListener('click', function() {
+		for (var i = 0; i < liElems.length; i++) {
+			if (liElems[i].dataset.grain === "refined grain") {
+				//console.log(liElems[i] + " is a whole grain.");
+				liElems[i].style.backgroundColor = '#ffff00';
+			}
+		}
+	});
+</script>
+</body>
+</html>

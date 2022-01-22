@@ -1,0 +1,71 @@
+#1: create()
+
+     // the create method
+             const yo = Rx.Observable.create(function(observer) {
+    	  const fn = setInterval(() => {
+    		// console.log(`Hello from the observable will be sent now: `);
+    		observer.next(`Hello from the observable`, console.log('Hello from the Observable'));}, 1000);
+          });
+        // const subscribe = yo.subscribe();
+        const subscribe = yo.subscribe(val => console.log(val + ': this is from the subscriber'));
+
+const subscribe = yo.subscribe(val => console.log(val + ': this is from the subscriber'));
+
+
+#2: of()
+
+Rx.Observable.of(`Hello World`)
+.subscribe(result => console.log(result));
+
+#3: from()
+
+const set = new Set([1, 2, 3])
+Rx.Observable.from(set)
+.map(x => x * 2)
+.subscribe(x => console.log(x),
+           error => console.error(error),
+           () => console.log('done'));
+		   
+#4: fromEvent()
+
+Rx.Observable.fromEvent(document, 'mousemove')
+.subscribe(event => console.log(event.clientX, event.clientY));
+
+
+#5: understanding observables
+
+ const source = Rx.Observable.create(observer => {
+        observer.next(`Hello`);
+        observer.next(`World`);
+        observer.complete();
+
+        return () => console.log(`disposed`);
+    });
+
+    const subscription = source.subscribe(
+        x => console.log(x),
+        error => console.error(error),
+        () => console.log(`done`));
+
+		
+#6: Subjects
+
+const subject = new Rx.Subject();
+
+const dataSource = Rx.Observable.interval(100)
+		.map(x => `interval message ${x}`)
+		.take(5);
+
+dataSource.subscribe(subject);
+
+subject.subscribe(x => console.log(x),
+			 error => console.error(error),
+			) => console.log('done'));
+
+subject.next(`message #1`);
+subject.next(`message #2`);
+
+setTimeout(() => subject.complete(), 300);
+
+
+#

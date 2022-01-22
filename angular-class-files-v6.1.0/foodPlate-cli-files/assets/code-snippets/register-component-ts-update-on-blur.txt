@@ -1,0 +1,8 @@
+constructor() {
+        this.regForm = new FormGroup({
+            firstname: new FormControl(null, {validators: Validators.required}),
+            email: new FormControl(null, [Validators.required, Validators.email]),
+            gender: new FormControl(null, [Validators.required]),
+            ageGroup: new FormControl(null, [Validators.required])
+        }, {updateOn: 'blur'});
+}

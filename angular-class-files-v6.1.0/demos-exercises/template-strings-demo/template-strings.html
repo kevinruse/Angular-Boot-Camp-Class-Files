@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Template Strings</title>
+    <link rel="icon" type="image/png" href="../favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="../favicon-16x16.png" sizes="16x16" />
+  <style>
+    html {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    #tmpl {
+      padding: 1em;
+      width: 350px;
+      border: 1px solid #000;
+    }
+  </style>
+</head>
+<body>
+<h1>Template String Literals</h1>
+<div id="tmpl"></div>
+<p>JavaScript Support <a href="http://kangax.github.io/compat-table/es6/#test-template_strings">Compatibility Table</a></p>
+  <p>http://kangax.github.io/compat-table/es6/#test-template_strings</p>
+<img src="../custom-elements/images/template-strings-support-chart.JPG" alt="">
+<script>
+    let firstName = 'Kevin';
+    let lastName = 'Ruse';
+
+    let fullName = `<div>
+                       <h1>My name is: </h1>
+                       <h1>${firstName} ${lastName} </h1>
+                    </div>`;
+    document.querySelector('#tmpl').innerHTML = fullName;
+</script>
+</body>
+</html>

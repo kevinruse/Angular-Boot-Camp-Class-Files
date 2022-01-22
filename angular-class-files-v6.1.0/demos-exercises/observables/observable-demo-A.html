@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Observable Demo #1</title>
+</head>
+<body>
+<script src="https://unpkg.com/@reactivex/rxjs@5.0.0-beta.7/dist/global/Rx.umd.js"></script>
+<script>
+    const source$ = Rx.Observable.create(observer => {
+        observer.next(`Hello`);
+        observer.next(`World`);
+        observer.complete();
+
+        return () => console.log(`disposed`);
+    });
+
+    const subscription = source$.subscribe(
+        x => console.log(x),
+        error => console.error(error),
+        () => console.log(`done`));
+
+    subscription.unsubscribe();
+</script>
+
+</body>
+</html>

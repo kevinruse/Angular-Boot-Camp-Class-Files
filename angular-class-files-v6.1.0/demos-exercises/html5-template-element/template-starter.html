@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>templates-starter</title>
+    <link rel="icon" type="image/png" href="../images/favicon.ico" />
+    <style>
+        html        { font-family: futura, helvetica, sans-serif; font-size: 1em; line-height: 1.4em; }
+        h2          { color: red; }
+        h3          { color: green; }
+        pre         { color: blue; font-size: 1.4em; }
+        button      { margin-top: 2em; }
+    </style>
+</head>
+<body>
+<h1>&lt;template&gt;</h1>
+<p>The template element is used to declare fragments of HTML that can be cloned and inserted in the document by script.</p>
+<br/><hr/>
+<h2>Try It Out</h2>
+
+<!-- ********* Important Stuff ********* -->
+
+<!-- template element content will not display on web page -->
+
+
+<!-- This is where template will be imported (cloned) into -->
+<div id="cloneOfTemplate"></div>
+
+<!-- Button calls JavaScript to Clone Template -->
+<button onClick="cloneTemplate();">Show the Template</button>
+
+<script>
+    function cloneTemplate() {
+
+        // Locate Template to Clone in DOM
+        var templateContentToClone = document.getElementById('templateToClone').content;
+
+        // Add User Name to Template Content via CSS Class "userName"
+        templateContentToClone.querySelector('.userName').textContent = "Kevin";
+
+        // Clone Template
+        //      document.importNode(externalNode, [deep])
+        //          Arguments
+        //              externalNode:   The node from another document to be imported.
+        //              deep:           A optional boolean, indicating whether the descendants of the imported node need to be imported. default=false
+        //
+        //          Creates a copy of a node from an external document that can be inserted into the current document.
+        //          https://developer.mozilla.org/en-US/docs/Web/API/Document/importNode
+        var cloneOfTemplate = document.importNode(templateContentToClone, true);
+
+        // Append Clone to DOM in div element
+        document.getElementById('cloneOfTemplate').appendChild(cloneOfTemplate);
+    }
+</script>
+
+<!-- ********* End of Important Stuff ********* -->
+
+<br/><hr/><br/>
+<h3>The Template:</h3>
+<pre>
+    &lt;template id="templateToClone"&gt;
+        Hi &lt;span class="userName"&gt;&lt;/span&gt;!
+        &lt;img src="glad.png" width="42" height="42"&gt;
+    &lt;/template&gt;
+    </pre>
+<h3>The JavaScript:</h3>
+<dl>
+    <dt>
+        importNode
+    <dd>
+        <pre>document.importNode(externalNode, [deep]) </pre>
+        <p>Creates a copy of a node from an external document that can be inserted into the current document.</p>
+    </dd>
+    <dt>arguments</dt>
+    <dd>
+        <pre>externalNode</pre>
+        The node from another document to be imported.
+        <pre>deep</pre>
+        An optional boolean, indicating whether the descendants of the imported node need to be imported. default=false
+    </dd>
+    </dt>
+</dl>
+<br/>
+<p>Docs: <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/importNode"> https://developer.mozilla.org/en-US/docs/Web/API/Document/importNode </a></p>
+<p>Spec: <a href="https://html.spec.whatwg.org/multipage/scripting.html#the-template-element">https://html.spec.whatwg.org/multipage/scripting.html#the-template-element</a></p>
+</body>
+
+</html>

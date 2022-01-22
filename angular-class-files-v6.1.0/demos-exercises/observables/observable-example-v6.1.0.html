@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Observable Example</title>
+
+    <script src="https://unpkg.com/@reactivex/rxjs@5.0.3/dist/global/Rx.js"></script>
+    <script type="text/javascript">
+        function MM_popupMsg(msg) { //v1.0
+          alert(msg);
+        }
+    </script>
+</head>
+<body>
+<img src="observables-chapter-image.jpg" usemap="#observerMap">
+<map name="observerMap">
+  <area shape="rect" coords="90,141,178,328" href="#officer" onclick="MM_popupMsg(`I'm the subject - Officer.
+  I implement both observer and observable APIs.
+     Remove the comments below the // OBSERVER 2 - the officer ~ lines 60-65.
+  I start a new data stream (every other bag).
+     Remove the comments below // filter operator for new data stream: every other bag  ~line 69.
+  Subscribe to the new stream by removing the comment on lines 77-85.`)">
+  <area shape="rect" coords="388,101,462,212" href="#screener" onclick="MM_popupMsg(`I'm the observer - screener.
+  I push data via a next() function.
+     Remove the comments below the comment // OBSERVER 1 - the screener. ~ line 43-48
+ `)">
+  <area shape="poly" coords="303,210,369,198,688,293,603,355,308,236" href="#observable" onclick="MM_popupMsg('I\'m the (inert) observable - Remove the comments below the lines\n' + ' // OBSERVABLE: the luggage stream of data\n'+
+' ~ line 52')">
+</map>
+<button id="stopBtn">Screener Stops the Conveyor Belt</button>
+<button id="officerStopBtn">Officer Stops the Conveyor Belt</button>
+<section onclick="MM_popupMsg('I\'m subscribed to the observable\'s data stream')">
+    <h1>Bag Number: <span id="bagNumber"></span></h1>
+</section>
+<button id="startDataStream" onclick="MM_popupMsg('Subscribe to the data stream - Remove the comment below the line\n' + '// STARTS THE DATA STREAM\n' +  '~ line 94')">Start the Data Stream</button>
+<script>
+
+// OBSERVER 1 - the screener
+    // observer is an interface of push-based notifications delivered by the observable;
+    // the observable calls the observers next(value) method to provide the notifications
+/*console.info('observer-1 (screener) created');
+let screenerObserver = {
+    next: luggage =>  console.log(`observer-1 screener sees: bag-${luggage}`),
+    error: error => console.log(error),
+    complete: () => console.log('all done')
+};*/
+
+// OBSERVABLE: the luggage stream of data
+/*console.log(`The luggage-stream observable is created via the create method`);
+const luggageDataSrc = Rx.Observable.create(function(observable) {
+    let bagNum = 0;
+    setInterval( () => {
+        observable.next(++bagNum);
+    }, 500);
+});*/
+
+// OBSERVER 2 - the officer
+/*console.info('observer-2 (officer) created');
+let officerSubject = new Rx.Subject();
+officerSubject = {
+    next: luggage =>  console.log(`officer-observer sees: every-other-bag-${luggage}`),
+    error: error => console.log(error),
+    complete: () => console.log('all done')
+};*/
+
+
+// OPERATORS
+ // filter operator for new data stream: every other bag
+ // const everyOtherBag = luggageDataSrc.filter(bagNum => bagNum % 2 === 0);
+
+// SUBJECT - The officer as subject
+ // subject (special type of observer) can multicast values to many observers
+ // methods: next(value), error(error) and complete()
+
+
+// THE OFFICER SUBSCRIPTION
+/*theOfficerSubscription = everyOtherBag.subscribe({
+    next: luggage =>  {
+        console.log(`subject-officer sees: every-other-bag-${luggage}`);
+        if(luggage === 100) {
+            theOfficerSubscription.unsubscribe();
+            theSubscription.unsubscribe();
+        }
+    }
+});*/
+
+// DOM OBSERVER
+/*  luggageDataSrc.subscribe({
+        next: luggage => document.querySelector('#bagNumber').innerText = luggage
+  });*/
+
+// THE SCREENER SUBSCRIPTION
+  // STARTS THE DATA STREAM
+  // theSubscription = luggageDataSrc.subscribe(screenerObserver);
+
+// Observer STOPs THE DATA STREAM
+   document.querySelector('#stopBtn').addEventListener('click', function() {
+        theSubscription.unsubscribe();
+    });
+
+// Subject STOPS THE DATA STREAM
+    document.querySelector('#officerStopBtn').addEventListener('click', function() {
+        theOfficerSubscription.unsubscribe();
+    });
+
+</script>
+</body>
+</html>

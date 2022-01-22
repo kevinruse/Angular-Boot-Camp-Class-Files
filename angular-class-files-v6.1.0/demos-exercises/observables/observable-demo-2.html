@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<meta name="robots" content="noindex">
+<html>
+<head>
+<meta name="description" content="observable-demo-3-keyup">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Observable Demo #2</title>
+<style>
+input, h4 {display: inline;}
+</style>
+</head>
+<body>
+
+<input type="text"> - 
+  <h4></h4>
+  <script src="https://unpkg.com/@reactivex/rxjs@5.0.0-beta.7/dist/global/Rx.umd.js"></script>
+<script id="jsbin-javascript">
+var txtInput = document.querySelector('input');
+var message = document.querySelector('h4');
+
+var keyDownStream = Rx.Observable.fromEvent(txtInput, 'keydown');
+
+
+var shiftKeyStream = keyDownStream
+  .map(event => event.keyCode)
+  .filter((keycode) => keycode === 16);
+
+
+console.log(keyDownStream);
+console.log(shiftKeyStream);
+
+
+keyDownStream.subscribe((event) => {
+  console.log(event); 
+  message.innerHTML = '';
+});
+
+
+shiftKeyStream.subscribe((event) => {
+     console.log(event);
+     message.innerHTML = "Shift Key Pressed";
+});
+
+
+
+</script>
+</body>
+</html>

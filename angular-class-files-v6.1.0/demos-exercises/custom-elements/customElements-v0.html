@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Custom Elements: version 0</title>
+  <link rel="icon" type="image/png" href="../images/favicon.ico" />
+  <style>
+    html {
+      font-family:Arial, Helvetica, sans-serif;
+    }
+    .hide {
+      display: none;
+    }
+    .show {
+      display: block;
+    }
+    #price {
+      color: #f00;
+    }
+  </style>
+
+</head>
+
+<body>
+<!-- the <h1> uses the HTMLElement API -->
+<h1>Custom Elements</h1>
+<!-- when registered the <product-display> element uses the HTMLElement API -->
+<product-display></product-display>
+<!-- the <kevin> uses the HTMLUnknownElement API -->
+<kevin></kevin>
+<h1 id="price" class="hide">$1,500.00</h1>
+<input id="invokeCustomAPI" type="button" value="Invoke Custom Element API">
+<p>Elements that use the HTMLElement API can have custom methods and properties added to them, thus creating a custom API for unique elements.</p>
+<h1>HTML &lt;H1&gt; Element</h1>
+<img src="images/HTMLElement.JPG" width="776" height="219" alt=""/>
+
+<h1>HTML Registered Custom Element</h1>
+<img src="images/HTMLCustomElement.JPG" width="780" height="247">
+
+<h1>HTML Unknown Element</h1>
+<img src="images/HTMLUnknownElement.JPG" width="803" height="263" alt=""/>
+<ul>
+      <li>
+          <a href="https://www.webcomponents.org/element/GoogleWebComponents/google-map">Google Maps Custom Elements Demo</a>
+      </li>
+      <li>
+          <a href="http://www.html5rocks.com/en/tutorials/webcomponents/customelements/">Custom Elements Tutorial</a>
+      </li>
+</ul>
+  <iframe src="http://caniuse.com/#search=custom%20element" frameborder="0" width="100%" height="1000px"></iframe>
+<script src="ProductDisplay-v0.js"></script>
+</body>
+</html>

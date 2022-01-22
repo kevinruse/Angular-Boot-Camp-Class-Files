@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo: RXJS Subjects - Version 6</title>
+    <link rel="icon" type="image/png" href="../images/favicon.ico" />
+    <style>
+        html { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
+        li { line-height: 1.75em; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/6.5.4/rxjs.umd.js"></script>
+    <script src="https://unpkg.com/rxjs/bundles/rxjs.umd.min.js"></script>
+</head>
+<body>
+<h1>The Subject Example</h1>
+<ul>
+    <li>The dataSource sequence will not begin until there is a subscription on the subject.</li>
+    <li>After the dataSource is complete, subscribers will no longer be actively subscribed.</li>
+    <li>The map() operator will pass each dataSource value through a transformation function and return new output. In this code, the map function takes each data source and returns it in a string: interval message #</li>
+    <li>The take() operator is a filtering operator the emits only the first five values emitted by the dataSource.</li>
+</ul>
+
+<script>
+
+    const { map, take } = rxjs.operators;
+    // subject example
+    const subject = new rxjs.Subject();
+
+    const dataSource = rxjs.interval(100)
+        .pipe(
+            map(x => `interval message ${x}`),
+            take(10));
+
+  dataSource.subscribe(subject);
+
+
+   subject.subscribe(x => console.log(x),
+        error => console.error(error),
+        () => console.log('done'));
+/*
+    subject.next(`message #1`);
+    subject.next(`message #2`);*/
+
+    setTimeout(() => subject.complete(), 300);
+</script>
+</body>
+</html>
